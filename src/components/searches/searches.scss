@@ -1,0 +1,16 @@
+@import './../../scss/variable.scss';
+@import './../../scss/mixin.scss';
+
+.top-bar {
+	height: 67px;
+	z-index: 51;
+	display: flex;
+	align-items: center;
+	position: relative;
+	border-bottom: 1px solid #dee7ef;
+	&__right {
+		flex: 1;
+		position: relative;
+		max-width: 300px;
+	}
+}

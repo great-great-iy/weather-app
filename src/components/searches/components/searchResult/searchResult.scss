@@ -1,0 +1,69 @@
+@import './../../../../scss/variable.scss';
+@import './../../../../scss/mixin.scss';
+
+.search-result {
+	display: none;
+	transition: visibility 0s linear 0s, opacity 0.2s 0s;
+	visibility: visible;
+	opacity: 1;
+
+	width: 100vw;
+	max-width: 450px;
+
+	z-index: 20;
+	position: absolute;
+	left: 0;
+	margin-top: 4px;
+	background-color: #fff;
+	border-radius: 3px;
+
+	strong {
+		font-size: 14px;
+		font-family: $main_font;
+	}
+
+	&.show {
+		display: block;
+		transition: visibility 0s linear 0s, opacity 0.2s 0s;
+		visibility: visible;
+		opacity: 1;
+	}
+	&-content {
+		padding: 12px 20px;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		background-color: #f7fafc;
+		border-bottom: 1px solid #edf2f7;
+		.flag {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-right: 15px;
+
+			padding: 5px;
+			box-sizing: border-box;
+
+			img {
+				width: 80%;
+			}
+		}
+	}
+	&__text {
+		margin-left: auto;
+	}
+
+	&-child:hover {
+		transform: scale(1.03, 1.02);
+		position: relative;
+		z-index: 20;
+		box-shadow: 0 4px 6px #ddd;
+		border-width: 0;
+		border-radius: 0.25rem;
+		background-color: #fff;
+		color: #2d3748;
+		transition: 0.3s;
+		border-bottom-width: 1px;
+		border-color: #edf2f7;
+	}
+}
