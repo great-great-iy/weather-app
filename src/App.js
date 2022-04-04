@@ -29,7 +29,7 @@ function App() {
     }, []);
 
     useEffect(() => {
-        const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+        // const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
         const requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=21.0003968&lon=105.7528669&appid=${apiKey}`
         function getUser() {
             try {
