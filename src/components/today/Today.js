@@ -26,6 +26,7 @@ function Today() {
 
     return (
         <div className="row tab-today">
+            {/* UV index */}
             <div className="tab-today__item col zoom-in">
                 <div className="box">
                     <div className="box-content">
