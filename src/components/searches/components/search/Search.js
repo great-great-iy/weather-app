@@ -1,12 +1,17 @@
 import React from 'react';
-import './Search.scss';
+import './search.scss';
 
 
 function Search() {
+
     return (
-        <>
-        
-        </>
+        <div className="search">
+            <input
+                type="text"
+                className="search__input input placeholder-theme-13"
+                placeholder="Search..."
+            />
+        </div>
     );
 }
 
