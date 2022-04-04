@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Routes, Rout, Route } from 'react-router-dom';
 import Hour from '../hour/Hour';
 import Searches from '../searches/Searches';
 import Today from '../today/Today';
@@ -11,9 +12,11 @@ function Content() {
         <div className="content">
             <Searches />
             <div className="content-main">
-                <Today />
-                {/* <Week /> */}
-                {/* <Hour/> */}
+                <Routes>
+                    <Route path='/' element={<Today />} />
+                    <Route path='week' element={<Week />} />
+                    <Route path='hour' element={<Hour />} />
+                </Routes>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useStore } from './../../hooks';
 import { actions } from './../../store';
@@ -12,6 +13,8 @@ function Navbar() {
     const { country } = state.sys;
     const { temp } = state.main;
     const { description, icon } = state.weather[0];
+
+    const temper = Number(temp).toFixed();
 
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -39,30 +42,30 @@ function Navbar() {
             <div className="side-nav__devider"></div>
             <ul>
                 <li>
-                    <div
+                    <Link to='/'
                         className={`side-menu ${active === 1 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(1)}
                     >
                         <div className="side-menu__title">
                             Today
                         </div>
-                    </div>
+                    </Link>
                 </li>
                 <li>
-                    <div
+                    <Link to='week'
                         className={`side-menu ${active === 2 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(2)}
                     >
                         <div className="side-menu__title">Week</div>
-                    </div>
+                    </Link>
                 </li>
                 <li>
-                    <div
+                    <Link to='hour'
                         className={`side-menu ${active === 3 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(3)}
                     >
                         <div className="side-menu__title">Hour</div>
-                    </div>
+                    </Link>
                 </li>
                 <li className="sidebar-weather">
                     <div className="">
@@ -95,7 +98,7 @@ function Navbar() {
                                         alt="icon"
                                         className="weather-img"
                                     />
-                                    <h1 className="weather-temp">{temp}°C</h1>
+                                    <h1 className="weather-temp">{temper}°C</h1>
                                     <h3 className="weather-desc">{description}</h3>
                                 </div>
                             </div>

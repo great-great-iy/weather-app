@@ -7,8 +7,6 @@ function Today() {
 
     const [state, dispatch] = useStore();
 
-    console.log(state);
-
     const { visibility } = state;
     const { speed } = state.wind;
     const { sunrise, sunset } = state.sys;

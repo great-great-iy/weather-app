@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Rout } from 'react-router-dom';
 import './App.scss';
 import { Content, Navbar } from './components';
@@ -10,7 +10,9 @@ function App() {
 
     const apiKey = 'e70a3de7d1e331d90caba417ecaa5647';
     const [state, dispatch] = useStore();
+    const [position, setPosition] = useState({});
     const [location, setLocation] = useState({
+        city: '',
         lat: '',
         lon: ''
     });
@@ -23,45 +25,48 @@ function App() {
         }
 
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log("Latitude is :", position.coords.latitude);
-            console.log("Longitude is :", position.coords.longitude);
+            setPosition(position);
+            setLocation({
+                ...location,
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            });
         })
     }, []);
+    console.log(position);
 
-    useEffect(() => {
-        // const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-        const requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=21.0003968&lon=105.7528669&appid=${apiKey}`
-        function getUser() {
-            try {
-                axios.get(requestUrl)
-                    .then(function (response) {
-                        return response.data;
-                    })
-                    .then((data) => {
-                        dispatch(actions.setData(data));
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getUser();
-    }, [location]);
+    // useEffect(() => {
+    //     // const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+    //     const requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${apiKey}`;
+    //     function getUser() {
+    //         try {
+    //             axios.get(requestUrl)
+    //                 .then(function (response) {
+    //                     return response.data;
+    //                 })
+    //                 .then((data) => {
+    //                     dispatch(actions.setData(data));
+    //                 })
+    //                 .catch(function (error) {
+    //                     // handle error
+    //                     console.log(error);
+    //                 })
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     getUser();
+    // }, [location]);
+
 
     return (
 
-        <>
-            Test
-        </>
-        // <BrowserRouter>
-        //   <div className='app'>
-        //     <Navbar />
-        //     <Content />
-        //   </div>
-        // </BrowserRouter>
+        <BrowserRouter>
+            <div className='app'>
+                <Navbar />
+                <Content />
+            </div>
+        </BrowserRouter>
     );
 }
 
