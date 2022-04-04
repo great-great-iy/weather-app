@@ -8,44 +8,47 @@ import axios from 'axios';
 
 function App() {
 
-    const apiKey = 'e70a3de7d1e331d90caba417ecaa5647';
+    const API_KEY = 'e70a3de7d1e331d90caba417ecaa5647';
+    // 'https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${apiKey}'
     const [state, dispatch] = useStore();
-    const [position, setPosition] = useState({});
+    const [city, setCity] = useState('');
     const [location, setLocation] = useState({
-        city: '',
         lat: '',
         lon: ''
     });
 
     useEffect(() => {
         if ("geolocation" in navigator) {
-            console.log("Available");
+            navigator.geolocation.getCurrentPosition((position) => {
+                setLocation({
+                    ...location,
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                });
+            })
         } else {
-            console.log("Not Available");
+            console.warn("Not Available");
         }
-
-        navigator.geolocation.getCurrentPosition((position) => {
-            setPosition(position);
-            setLocation({
-                ...location,
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
-            });
-        })
     }, []);
-    console.log(position);
 
     // useEffect(() => {
-    //     // const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-    //     const requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${apiKey}`;
+    //     const requestUrl1 = `https://api.openweathermap.org/data/2.5/onecall`
+    //     const requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API_KEY}`;
     //     function getUser() {
     //         try {
-    //             axios.get(requestUrl)
+    //             axios.get(requestUrl1, {
+    //                 params: {
+    //                     lat: location.lat,
+    //                     lon: location.lon,
+    //                     units: 'metric',
+    //                     appid: API_KEY
+    //                 }
+    //             })
     //                 .then(function (response) {
     //                     return response.data;
     //                 })
     //                 .then((data) => {
-    //                     dispatch(actions.setData(data));
+    //                     dispatch(actions.setDataDays(data));
     //                 })
     //                 .catch(function (error) {
     //                     // handle error
@@ -56,8 +59,9 @@ function App() {
     //         }
     //     }
     //     getUser();
-    // }, [location]);
+    // }, [city]);
 
+    // console.log(state.days);
 
     return (
 

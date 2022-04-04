@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../hooks";
+import { dateSun } from "../../mixins";
 import { actions } from "../../store";
 import "./today.scss";
 
@@ -7,22 +8,10 @@ function Today() {
 
     const [state, dispatch] = useStore();
 
-    const { visibility } = state;
-    const { speed } = state.wind;
-    const { sunrise, sunset } = state.sys;
-    const { humidity, pressure } = state.main;
-
-    const dateSunrise = new Date(sunrise * 1000);
-    const [hourSunrise, minuteSunrise] = [
-        dateSunrise.getHours(),
-        dateSunrise.getMinutes(),
-    ];
-
-    const dateSunset = new Date(sunset * 1000);
-    const [hourSunset, minuteSunset] = [
-        dateSunset.getHours(),
-        dateSunset.getMinutes(),
-    ];
+    const { visibility } = state.day;
+    const { speed } = state.day.wind;
+    const { sunrise, sunset } = state.day.sys;
+    const { humidity, pressure } = state.day.main;
 
     return (
         <div className="row tab-today">
@@ -168,7 +157,7 @@ function Today() {
                                     ></path>
                                 </svg>
                                 <span className="box-value">
-                                    {hourSunrise}:{minuteSunrise} am
+                                    {dateSun(sunrise)} am
                                 </span>
                             </div>
 
@@ -212,7 +201,7 @@ function Today() {
                                     ></path>
                                 </svg>
                                 <span className="box-value">
-                                    {hourSunset}:{minuteSunset} pm
+                                    {dateSun(sunset)} pm
                                 </span>
                             </div>
                         </div>

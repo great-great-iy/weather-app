@@ -1,0 +1,1 @@
+export const rounding = num => Number(num).toFixed();

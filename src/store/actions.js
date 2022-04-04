@@ -5,8 +5,14 @@ import * as Types from './constant';
 //     location
 // })
 
-export const setData = data => ({
-    type: Types.SET_DATA,
+export const setDataDaily = data => ({
+    type: Types.SET_DATA_DAILY,
+    data
+})
+
+
+export const setDataDays = data => ({
+    type: Types.SET_DATA_DAYS,
     data
 })
 

@@ -3,27 +3,18 @@ import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useStore } from './../../hooks';
 import { actions } from './../../store';
+import { dateFormat, dayFormat, rounding } from '../../mixins';
 
 function Navbar() {
 
     const [state, dispatch] = useStore();
 
 
-    const { name } = state;
-    const { country } = state.sys;
-    const { temp } = state.main;
-    const { description, icon } = state.weather[0];
+    const { name } = state?.day;
+    const { country } = state?.day.sys;
+    const { temp } = state?.day?.main;
+    const { description, icon } = state?.day?.weather[0];
 
-    const temper = Number(temp).toFixed();
-
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    const now = new Date(state.dt * 1000);
-
-    const day = days[now.getDay()];
-    const date = now.getDate();
-    const month = now.getMonth() + 1;
-    const fullYear = now.getFullYear();
 
     const [active, setActive] = useState(1);
 
@@ -73,8 +64,8 @@ function Navbar() {
                             <div className="weather-side">
                                 <div className="weather-gradient"></div>
                                 <div className="date-container">
-                                    <h2 className="date-dayname">{day}</h2>
-                                    <span className="date-day"> {date < 10 ? '0' + date : date} - {(month + 1) < 10 ? '0' + month : month} - {fullYear}</span>
+                                    <h2 className="date-dayname">{dateFormat(state?.day.dt)}</h2>
+                                    <span className="date-day">{dayFormat(state?.day.dt)}</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -98,7 +89,7 @@ function Navbar() {
                                         alt="icon"
                                         className="weather-img"
                                     />
-                                    <h1 className="weather-temp">{temper}°C</h1>
+                                    <h1 className="weather-temp">{rounding(temp)}°C</h1>
                                     <h3 className="weather-desc">{description}</h3>
                                 </div>
                             </div>
