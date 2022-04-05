@@ -6,12 +6,13 @@ import "./week.scss";
 function Week() {
 
     const [state, dispatch] = useStore();
-    const dateCurrent = { ...state?.daysData?.current };
-    const dates = [...state?.daysData?.daily]
+    const dates = [...state?.daysData?.daily];
+    const [active, setActive] = useState(0);
     const [datePicked, setDatePicked] = useState(dates[0]);
 
-    const handlerPick = (elem) => {
+    const handlerPick = (elem, index) => {
         setDatePicked(elem);
+        setActive(index);
     }
 
     const showWeather = (dates) => {
@@ -19,7 +20,7 @@ function Week() {
 
         result = dates.map((elem, index) => {
             return (
-                <div key={index} className="tab-week__item col zoom-in" onClick={() => handlerPick(elem)}>
+                <div key={index} className={`tab-week__item col zoom-in ${active === index ? 'tab-week__item--active' : ''}`} onClick={() => handlerPick(elem, index)}>
                     <div className="week">
                         <div className="week-header">
                             <div className="week-header__day">{dateFormat(elem.dt)}</div>
@@ -242,7 +243,7 @@ function Week() {
                                 <p>Sunrise</p>
                             </div>
                             <div className="week-picked__decs-content">
-                                <p>{dateSun(datePicked.sunrise)} am</p>
+                                <p>{timeFormat(datePicked.sunrise)}</p>
                             </div>
                         </div>
                     </div>
@@ -293,7 +294,7 @@ function Week() {
                                 <p>Sunset</p>
                             </div>
                             <div className="week-picked__decs-content">
-                                <p>{dateSun(datePicked.sunset)} pm</p>
+                                <p>{timeFormat(datePicked.sunset)}</p>
                             </div>
                         </div>
                     </div>

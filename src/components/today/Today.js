@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../hooks";
-import { dateSun } from "../../mixins";
+import { dateSun, timeFormat } from "../../mixins";
 import { actions } from "../../store";
 import "./today.scss";
 
@@ -157,7 +157,7 @@ function Today() {
                                     ></path>
                                 </svg>
                                 <span className="box-value">
-                                    {dateSun(sunrise)} am
+                                    {timeFormat(sunrise)}
                                 </span>
                             </div>
 
@@ -201,7 +201,7 @@ function Today() {
                                     ></path>
                                 </svg>
                                 <span className="box-value">
-                                    {dateSun(sunset)} pm
+                                    {timeFormat(sunset)}
                                 </span>
                             </div>
                         </div>

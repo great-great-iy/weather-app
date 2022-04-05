@@ -9,9 +9,9 @@
 	&:nth-child(3) {
 		.box {
 			&-icon {
-				text-align: left;
 				.icon-text {
 					display: flex;
+					justify-content: center;
 				}
 			}
 			&-value{
