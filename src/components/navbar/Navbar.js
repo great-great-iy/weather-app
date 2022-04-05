@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useStore } from './../../hooks';
-import { actions } from './../../store';
 import { dateFormat, dayFormat, rounding } from '../../mixins';
 
-function Navbar() {
+function Navbar(props) {
 
-    const [state, dispatch] = useStore();
+    const [state] = useStore();
 
+    const { handlePicked } = props;
 
     const { name } = state?.dayData;
     const { country } = state?.dayData.sys;
@@ -20,7 +19,7 @@ function Navbar() {
 
     const handlerClickNavbar = (value) => {
         setActive(value);
-        // picked(value);
+        handlePicked(value);
     }
 
     return (
@@ -33,30 +32,30 @@ function Navbar() {
             <div className="side-nav__devider"></div>
             <ul>
                 <li>
-                    <Link to='/'
+                    <div
                         className={`side-menu ${active === 1 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(1)}
                     >
                         <div className="side-menu__title">
                             Today
                         </div>
-                    </Link>
+                    </div>
                 </li>
                 <li>
-                    <Link to='week'
+                    <div
                         className={`side-menu ${active === 2 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(2)}
                     >
                         <div className="side-menu__title">Week</div>
-                    </Link>
+                    </div>
                 </li>
                 <li>
-                    <Link to='hour'
+                    <div
                         className={`side-menu ${active === 3 ? "side-menu--active" : ""}`}
                         onClick={() => handlerClickNavbar(3)}
                     >
                         <div className="side-menu__title">Hour</div>
-                    </Link>
+                    </div>
                 </li>
                 <li className="sidebar-weather">
                     <div className="">
@@ -86,7 +85,8 @@ function Navbar() {
                                 <div className="weather-container">
                                     <img
                                         src={`http://openweathermap.org/img/w/${icon}.png`}
-                                        alt="icon"
+                                        alt={icon}
+                                        title={description}
                                         className="weather-img"
                                     />
                                     <h1 className="weather-temp">{rounding(temp)}°C</h1>

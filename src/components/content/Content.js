@@ -7,16 +7,16 @@ import Week from '../week/Week';
 import './content.scss';
 
 
-function Content() {
+function Content(props) {
+
+    const { active } = props;
     return (
         <div className="content">
             <Searches />
             <div className="content-main">
-                <Routes>
-                    <Route path='/' element={<Today />} />
-                    <Route path='week' element={<Week />} />
-                    <Route path='hour' element={<Hour />} />
-                </Routes>
+                {active === 1 && <Today />}
+                {active === 2 && <Week />}
+                {active === 3 && <Hour />}
             </div>
         </div>
     );

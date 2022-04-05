@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useStore } from "../../hooks";
-import { dateSun, timeFormat } from "../../mixins";
-import { actions } from "../../store";
+import { timeFormat } from "../../mixins";
 import "./today.scss";
 
 function Today() {
 
-    const [state, dispatch] = useStore();
+    const [state] = useStore();
 
     const { visibility } = state.dayData;
     const { speed } = state.dayData.wind;

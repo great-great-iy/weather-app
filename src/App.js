@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import { Content, Navbar } from './components';
 import { useStore } from './hooks';
@@ -14,6 +13,12 @@ function App() {
         lat: '',
         lon: ''
     });
+
+    const [active, setActive] = useState(1);
+
+    const handlePicked = (value) => {
+        setActive(value);
+    }
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -61,19 +66,46 @@ function App() {
         getDays();
     }, [state.lat, state.lon]);
 
-    console.log(location);
-    console.log(state.cityName);
-    console.log(state);
-
     return (
 
-        <BrowserRouter>
-            <div className='app'>
-                <Navbar />
-                <Content />
-            </div>
-        </BrowserRouter>
+        <div className='app'>
+            <Navbar handlePicked={handlePicked} />
+            <Content active={active} />
+        </div>
+
     );
 }
 
 export default App;
+
+
+// import React from "react";
+// import { Chart } from "react-google-charts";
+
+// export const data = [
+//     ["Year", "Temp", "Fell like"],
+//     ["2004", 1000, 400],
+//     ["2005", 1170, 460],
+//     ["2006", 660, 1120],
+//     ["2007", 1030, 540],
+// ];
+
+// export const options = {
+//     title: "Company Performance",
+//     curveType: "function",
+//     legend: { position: "bottom" },
+// };
+
+// function App() {
+//     return (
+//         <Chart
+//             chartType="LineChart"
+//             width="100%"
+//             height="400px"
+//             data={data}
+//             options={options}
+//         />
+//     );
+// }
+
+// export default App;

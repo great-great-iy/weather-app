@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useStore } from "../../hooks";
-import { dateFormat, timeFormat, dayFormat, getTempCurrent, dateSun, rounding } from "../../mixins";
+import { dateFormat, timeFormat, dayFormat, getTempCurrent, rounding } from "../../mixins";
 import "./week.scss";
 
 function Week() {
 
-    const [state, dispatch] = useStore();
+    const [state] = useStore();
     const dates = [...state?.daysData?.daily];
     const [active, setActive] = useState(0);
     const [datePicked, setDatePicked] = useState(dates[0]);
@@ -30,7 +30,8 @@ function Week() {
                             <div className="week-content__img">
                                 <img
                                     src={`http://openweathermap.org/img/w/${elem.weather[0]?.icon}.png`}
-                                    alt="icon"
+                                    alt={elem.weather[0]?.icon}
+                                    title={elem.weather[0]?.description}
                                     className="week-weather-img"
                                 />
                             </div>
@@ -352,4 +353,4 @@ function Week() {
     );
 }
 
-export default Week;
+export default React.memo(Week);
