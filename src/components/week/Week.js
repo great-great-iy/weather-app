@@ -6,8 +6,8 @@ import "./week.scss";
 function Week() {
 
     const [state, dispatch] = useStore();
-    const dateCurrent = { ...state?.days?.current };
-    const dates = [...state?.days?.daily]
+    const dateCurrent = { ...state?.daysData?.current };
+    const dates = [...state?.daysData?.daily]
     const [datePicked, setDatePicked] = useState(dates[0]);
 
     const handlerPick = (elem) => {
@@ -28,7 +28,7 @@ function Week() {
                         <div className="week-content">
                             <div className="week-content__img">
                                 <img
-                                    src={`http://openweathermap.org/img/wn/${elem.weather[0]?.icon}@2x.png`}
+                                    src={`http://openweathermap.org/img/w/${elem.weather[0]?.icon}.png`}
                                     alt="icon"
                                     className="week-weather-img"
                                 />
@@ -302,7 +302,7 @@ function Week() {
 
                         <div className="week-picked__logo">
                             <img
-                                src={`http://openweathermap.org/img/wn/${datePicked.weather[0]?.icon}@2x.png`}
+                                src={`http://openweathermap.org/img/w/${datePicked.weather[0]?.icon}.png`}
                                 alt="icon"
                                 className="week-weather-img"
                             />

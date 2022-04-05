@@ -10,10 +10,10 @@ function Navbar() {
     const [state, dispatch] = useStore();
 
 
-    const { name } = state?.day;
-    const { country } = state?.day.sys;
-    const { temp } = state?.day?.main;
-    const { description, icon } = state?.day?.weather[0];
+    const { name } = state?.dayData;
+    const { country } = state?.dayData.sys;
+    const { temp } = state?.dayData?.main;
+    const { description, icon } = state?.dayData?.weather[0];
 
 
     const [active, setActive] = useState(1);
@@ -64,8 +64,8 @@ function Navbar() {
                             <div className="weather-side">
                                 <div className="weather-gradient"></div>
                                 <div className="date-container">
-                                    <h2 className="date-dayname">{dateFormat(state?.day.dt)}</h2>
-                                    <span className="date-day">{dayFormat(state?.day.dt)}</span>
+                                    <h2 className="date-dayname">{dateFormat(state?.dayData.dt)}</h2>
+                                    <span className="date-day">{dayFormat(state?.dayData.dt)}</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -85,7 +85,7 @@ function Navbar() {
                                 </div>
                                 <div className="weather-container">
                                     <img
-                                        src={`http://openweathermap.org/img/wn/${icon}.png`}
+                                        src={`http://openweathermap.org/img/w/${icon}.png`}
                                         alt="icon"
                                         className="weather-img"
                                     />

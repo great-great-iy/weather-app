@@ -1,14 +1,14 @@
 import * as Types from './constant';
 
+
 let initState = {
-    city: '',
+    cityName: '',
     lat: '',
     lon: '',
-    day: {
+    dayData: {
         base: "stations",
         clouds: {
             all: 0,
-
             cod: 200
         },
         coord: {
@@ -48,7 +48,7 @@ let initState = {
             speed: 2.46
         }
     },
-    days:
+    daysData:
     {
         lat: 21.0004,
         "lon": 105.7529,
@@ -1756,19 +1756,26 @@ function reducer(state = initState, action) {
         case Types.SET_DATA_DAILY: {
             state = {
                 ...state,
-                day: { ...action.data }
+                dayData: { ...action.data }
             }
             return state;
         }
         case Types.SET_DATA_DAYS: {
             state = {
                 ...state,
-                days: { ...action.data }
+                daysData: { ...action.data }
             }
             return state;
         }
         case Types.GET_DATA: {
             return state
+        }
+        case Types.FIND_BY_CITY_NAME: {
+            state = {
+                ...state,
+                cityName: action.cityName
+            }
+            return state;
         }
         default:
             throw new Error('Invalid action!')

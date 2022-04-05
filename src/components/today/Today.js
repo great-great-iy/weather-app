@@ -8,10 +8,10 @@ function Today() {
 
     const [state, dispatch] = useStore();
 
-    const { visibility } = state.day;
-    const { speed } = state.day.wind;
-    const { sunrise, sunset } = state.day.sys;
-    const { humidity, pressure } = state.day.main;
+    const { visibility } = state.dayData;
+    const { speed } = state.dayData.wind;
+    const { sunrise, sunset } = state.dayData.sys;
+    const { humidity, pressure } = state.dayData.main;
 
     return (
         <div className="row tab-today">
@@ -45,7 +45,7 @@ function Today() {
                                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                             </svg>
                         </div>
-                        <div className="box-value">0</div>
+                        <div className="box-value">{state.daysData?.current?.uvi}</div>
                     </div>
                 </div>
             </div>

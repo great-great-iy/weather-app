@@ -4,12 +4,10 @@ import './App.scss';
 import { Content, Navbar } from './components';
 import { useStore } from './hooks';
 import { actions } from './store';
-import axios from 'axios';
+import { fetchCoord, getDataDefault } from './api/fetchWeather';
 
 function App() {
 
-    const API_KEY = 'e70a3de7d1e331d90caba417ecaa5647';
-    // 'https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${apiKey}'
     const [state, dispatch] = useStore();
     const [city, setCity] = useState('');
     const [location, setLocation] = useState({
@@ -31,37 +29,26 @@ function App() {
         }
     }, []);
 
-    // useEffect(() => {
-    //     const requestUrl1 = `https://api.openweathermap.org/data/2.5/onecall`
-    //     const requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API_KEY}`;
-    //     function getUser() {
-    //         try {
-    //             axios.get(requestUrl1, {
-    //                 params: {
-    //                     lat: location.lat,
-    //                     lon: location.lon,
-    //                     units: 'metric',
-    //                     appid: API_KEY
-    //                 }
-    //             })
-    //                 .then(function (response) {
-    //                     return response.data;
-    //                 })
-    //                 .then((data) => {
-    //                     dispatch(actions.setDataDays(data));
-    //                 })
-    //                 .catch(function (error) {
-    //                     // handle error
-    //                     console.log(error);
-    //                 })
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //     getUser();
-    // }, [city]);
+    useEffect(() => {
+        // const requestUrl1 = `https://api.openweathermap.org/data/2.5/onecall`
+        // const requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API_KEY}`;
 
-    // console.log(state.days);
+        function getUser() {
+            try {
+                getDataDefault(location.lat, location.lon).then((data) => {
+                    dispatch(actions.setDataDaily(data));
+                })
+                fetchCoord(location.lat, location.lon).then((data) => {
+                    dispatch(actions.setDataDays(data));
+                })
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getUser();
+    }, [city]);
+
+    console.log(state.dayData)
 
     return (
 
