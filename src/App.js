@@ -16,10 +16,6 @@ function App() {
         lon: ''
     });
 
-    const cityName = state.cityName;
-
-    const [test, setTest] = useState('done');
-
     useEffect(() => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -35,29 +31,15 @@ function App() {
     }, []);
 
     useEffect(() => {
-        // const requestUrl1 = `https://api.openweathermap.org/data/2.5/onecall`
-        // const requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API_KEY}`;
-
         function getDay() {
             try {
                 if (state.cityName === '') {
                     getDataDefault(location.lat, location.lon).then((data) => {
                         dispatch(actions.setDataDaily(data));
                     })
-                    fetchCoord(location.lat, location.lat).then((data) => {
-                        dispatch(actions.setDataDays(data));
-                    })
                 } else {
                     findCity(state.cityName).then((data) => {
                         dispatch(actions.setDataDaily(data));
-                        setLocation({
-                            ...location,
-                            lat: data.lat,
-                            lon: data.lon
-                        });
-                    })
-                    fetchCoord(location.lat, location.lat).then((data) => {
-                        dispatch(actions.setDataDays(data));
                     })
                 }
             } catch (error) {
