@@ -11,7 +11,7 @@ function Search() {
 
     const handleTextChange = (e) => {
         e.preventDefault();
-        setValue(e.target.value)
+        setValue(e.target.value);
     }
 
     return (

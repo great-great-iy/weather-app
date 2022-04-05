@@ -1,3 +1,4 @@
+import { findByCityName } from './actions';
 import * as Types from './constant';
 
 
@@ -1750,12 +1751,14 @@ let initState = {
 };
 
 
-function reducer(state = initState, action) {
+const reducer = (state = initState, action) => {
     switch (action.type) {
         //...
         case Types.SET_DATA_DAILY: {
             state = {
                 ...state,
+                lat: action.data?.coord?.lat,
+                lon: action.data?.coord?.lon,
                 dayData: { ...action.data }
             }
             return state;
