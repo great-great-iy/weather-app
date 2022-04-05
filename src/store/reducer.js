@@ -1,4 +1,3 @@
-import { findByCityName } from './actions';
 import * as Types from './constant';
 
 
@@ -1769,9 +1768,6 @@ const reducer = (state = initState, action) => {
                 daysData: { ...action.data }
             }
             return state;
-        }
-        case Types.GET_DATA: {
-            return state
         }
         case Types.FIND_BY_CITY_NAME: {
             state = {

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Rout } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import { Content, Navbar } from './components';
 import { useStore } from './hooks';
 import { actions } from './store';
 import { fetchCoord, findCity, getDataDefault } from './api/fetchWeather';
-import { setDataDays } from './store/actions';
+
 
 function App() {
 
     const [state, dispatch] = useStore();
-    const [city, setCity] = useState('');
     const [location, setLocation] = useState({
         lat: '',
         lon: ''
@@ -47,30 +46,24 @@ function App() {
             }
         }
         getDay();
-    }, [state.cityName]);
+    }, [location, state.cityName]);
 
     useEffect(() => {
         function getDays() {
             try {
-                function getData() {
-                    try {
-                        fetchCoord(state.lat, state.lon).then((data) => {
-                            dispatch(actions.setDataDays(data));
-                        })
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
-                getData();
+                fetchCoord(state.lat, state.lon).then((data) => {
+                    dispatch(actions.setDataDays(data));
+                })
             } catch (error) {
                 console.error(error);
             }
         }
         getDays();
-    }, [state.cityName, state.dayData]);
+    }, [state.lat, state.lon]);
 
-    console.log(city);
-    console.log(state)
+    console.log(location);
+    console.log(state.cityName);
+    console.log(state);
 
     return (
 
