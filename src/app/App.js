@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import { Content, Navbar } from './components';
-import { useStore } from './hooks';
-import { actions } from './store';
-import { fetchCoord, findCity, getDataDefault } from './api/fetchWeather';
+import { Content, Navbar } from '../components';
+import { useStore } from '../hooks';
+import { actions } from '../store';
+import { fetchCoord, findCity, getDataDefault } from '../api/fetchWeather';
 
 
 function App() {
